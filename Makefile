@@ -21,7 +21,7 @@ OUT = ./build/$(RUN_ARGS)
 RS_SRC = $(RUN_ARGS)/src/main.rs
 
 cpp : $(SRC)
-	g++ -Wall -std=c++2a $(SRC) -o $(OUT) && $(OUT)
+	g++ -g -Wall -std=c++2a $(SRC) -o $(OUT) && $(OUT)
 
 rust : $(RS_SRC)
 	cd $(RUN_ARGS); cargo run

@@ -10,7 +10,17 @@ using namespace std;
 
 vector<string> parse_input(string path);
 
+void day_one();
+void day_two();
+
 int main(int argc, char *argv[]) {
+  // day_one();
+  day_two();
+
+  return 0;
+}
+
+void day_one() {
   vector<string> rucksack_items;
   int sum = 0;
 
@@ -50,9 +60,52 @@ int main(int argc, char *argv[]) {
     sum += (*common > 96 && *common < 123) ? *common - 96 : *common - 38;
   }
 
-  cout << "[Day 3.1] \x1b[32m" << sum << endl;
+  cout << "[Day 3.1] \x1b[32m" << sum << "\x1b[0m" << endl;
+}
 
-  return 0;
+void day_two() {
+  vector<string> lines;
+  int sum = 0;
+
+  try {
+    lines = parse_input("inputs/d3");
+
+  } catch (char *c) {
+    cout << c << endl;
+  }
+
+  for (int i = 0; i < lines.size(); i += 3) {
+
+    int freq1[52] = {0};
+    int freq2[52] = {0};
+    int freq3[52] = {0};
+
+    for (char c : lines[i]) {
+      size_t x = (c >= 'A' && c <= 'Z') ? (c - 'A') + 26 : (c - 'a');
+      freq1[x]++;
+    }
+
+    for (char c : lines[i + 1]) {
+      size_t x = (c >= 'A' && c <= 'Z') ? (c - 'A') + 26 : (c - 'a');
+      freq2[x]++;
+    }
+
+    for (char c : lines[i + 2]) {
+      size_t x = (c >= 'A' && c <= 'Z') ? (c - 'A') + 26 : (c - 'a');
+      freq3[x]++;
+    }
+
+    for (int j = 0; j < 52; j++) {
+      int tmp = min(freq1[j], freq2[j]);
+
+      if (min(tmp, freq3[j]) > 0) {
+        sum += (j + 1);
+        break;
+      }
+    }
+  }
+
+  cout << sum << endl;
 }
 
 /**

@@ -17,6 +17,10 @@
 
 # C++
 
+## Tidbits
+
+- `<<` and `>>` are called _insertion_ and _extraction_ operators respectively.
+
 ## Reading a file
 
 - Steps:
@@ -73,7 +77,30 @@ if (file.is_open()) {
 } /* prints "eggs" because the >> operator reads the string only until it
 encounters a whitespace. */
 
-
-
 }
 ```
+
+- NOTE: using `>>` operator on the `fstream` object will cause the last word to
+  be printed twice because, the pointer has not reached the `EOF` in the while
+  predicate and will run the last time twice. A solution is to have something
+  like this:
+  ```cpp
+  while (file >> var1 >> var2)
+  {
+  	  cout << var1 << "," << var2 <<'\n';
+    }
+  ```
+
+## Operator Cascading
+
+Since stream insertion `<<` and extraction `>>` operators are left associative,
+they can be "chained" like in
+
+```
+file >> x >> y;
+cout << "hello" << '\n';
+```
+
+In the `file >> x >> y` line, first `>>` is called on the file stream object,
+which returns a reference to stream object, and second `>>` is called on it
+again with `y` as the argument.

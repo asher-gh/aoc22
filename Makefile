@@ -12,21 +12,26 @@ ifeq (cpp,$(firstword $(MAKECMDGOALS)))
   $(eval $(RUN_ARGS):;@:)
 endif
 
+ifeq (cargo,$(firstword $(MAKECMDGOALS)))
+  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  $(eval $(RUN_ARGS):;@:)
+endif
+
 
 .PHONY: cpp rust
 .SILENT:
 
 SRC = $(RUN_ARGS)/$(RUN_ARGS).cpp
 OUT = ./build/$(RUN_ARGS)
-RS_SRC = $(RUN_ARGS)/src/main.rs
+RS_SRC = $(RUN_ARGS)/Cargo.toml
 
 cpp : $(SRC)
 	g++ -g -Wall -std=c++2a $(SRC) -o $(OUT) && $(OUT)
 
-rust : $(RS_SRC)
+rust : 
 	cd $(RUN_ARGS); cargo run
 
-$(RS_SRC) : ./$(RUN_ARGS)
+cargo : $(RUN_ARGS)
 	cd $(RUN_ARGS); cargo init
 
 

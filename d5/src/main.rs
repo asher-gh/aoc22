@@ -105,12 +105,7 @@ fn main() {
 		}
 	}
 
-	println!(
-		"{:=<2$} Initial Stack {:=>2$}",
-		"",
-		"",
-		stack_list.len() * 2 - 15 / 2
-	);
+	println!("{:=^1$}", " Initial Stack ", stack_list.len() * 4);
 	print_stacks(&stack_list, stack_size);
 
 	// ======================== Parsing the move instructions =========================
@@ -139,12 +134,7 @@ fn main() {
 		// print_stacks(&stack_list, stack_size);
 	}
 
-	println!(
-		"{:=<2$} Final Stack {:=>2$}",
-		"",
-		"",
-		stack_list.len() * 2 - 12 / 2
-	);
+	println!("{:=^1$}", " Final Stack ", stack_list.len() * 4);
 	print_stacks(&stack_list, stack_size);
 	println!("Total moves: {move_counts}");
 

@@ -104,3 +104,19 @@ cout << "hello" << '\n';
 In the `file >> x >> y` line, first `>>` is called on the file stream object,
 which returns a reference to stream object, and second `>>` is called on it
 again with `y` as the argument.
+
+# Rust
+
+## Padding strings
+
+- Strings in `print`, `println`, and `format` can be formatted using the _fill
+  feature_. `'{' ':' <fill> <align> <width> '}`
+
+```rust
+println!("love: {:♥<5}", "#");    // love: #♥♥♥♥
+println!("love: {:♥>5}", "#");    // love: ♥♥♥♥#
+println!("love: {:♥^5}", "#");    // love: ♥♥#♥♥
+```
+
+`<`and `>` define alignment, `4` is the amount of characters to insert (if space
+available).

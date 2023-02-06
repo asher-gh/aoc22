@@ -128,7 +128,7 @@ fn main() {
 			.len()
 			.saturating_sub(*&cap[1].parse::<usize>().unwrap());
 		let mut tail = from.split_off(split_at);
-		tail.reverse();
+		// tail.reverse();
 
 		let to = &mut stack_list[(*&cap[3].parse::<usize>().unwrap()) - 1];
 
